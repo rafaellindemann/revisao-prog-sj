@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 import './Imesada.css'
 
+
 function Imesada() {
     const [saldo, setSaldo] = useState(0);
     const [inputValor, setInputValor] = useState('');
+    const [movimentacoes, setMovimentacoes] = useState([
+        {tipo: 'crédito', valor: 10, id: Date.now(), descricao: 'Agiotagem'}
+    ])
 
     function creditar(){
         setSaldo(saldo + Number(inputValor))
+
         setInputValor('')
     }
     function debitar(){
@@ -34,6 +39,13 @@ function Imesada() {
                 <div className="botoes">
                     <button onClick={creditar}>Creditar</button>
                     <button onClick={debitar}>Debitar</button>
+                </div>
+                <div className={"render-cards"}>
+                    {movimentacoes.map( (m) => (
+                        <div key={m.id} className={m.tipo}>
+                            <p>{m.descricao}</p>
+                        </div>
+                    ) )}
                 </div>
             </div>
         </div>
